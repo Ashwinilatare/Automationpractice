@@ -1,0 +1,53 @@
+package seleniumpractice;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+public class genericbasicfunction {
+
+	public static void main(String[] args) {
+		/*1. Set the required browser driver executable path using:	System.setProperty( key, value);*/
+		System.setProperty("webdriver.chrome.driver", ".\\executables\\chromedriver.exe");
+		/*2. After setting the path of driver executable, create an instance of required browser*/
+		WebDriver driver=new ChromeDriver();
+		//enter required application URL
+		driver.get("https://www.google.com");
+		//print page title
+		System.out.println("Current page title is: "+driver.getTitle());
+		//print current page url
+		System.out.println("Current page url is :"+driver.getCurrentUrl());
+		//current page source code
+		String pageSourceCode=driver.getPageSource();
+		//System.out.println("Source code: "+pageSourceCode);
+		System.out.println("Page source length: "+pageSourceCode.length());
+		//close opened browser
+		driver.close();
+	}
+	
+	public static WebDriver setUp(String browsername) {		
+		if(browsername.equalsIgnoreCase("chrome")) {
+			/*1. Set the required browser driver executable path using:	System.setProperty( key, value);*/
+			System.setProperty("webdriver.chrome.driver", ".\\executables\\chromedriver.exe");
+			/*2. After setting the path of driver executable, create an instance of required browser*/
+			return new ChromeDriver();
+		}else if(browsername.equalsIgnoreCase("firefox")) {
+			/*1. Set the required browser driver executable path using:	System.setProperty( key, value);*/
+			System.setProperty("webdriver.gecko.driver", ".\\executables\\geckodriver.exe");
+			/*2. After setting the path of driver executable, create an instance of required browser*/
+			return new FirefoxDriver();
+		}else if(browsername.equalsIgnoreCase("ie")) {
+			/*1. Set the required browser driver executable path using:	System.setProperty( key, value);*/
+			System.setProperty("webdriver.ie.driver", ".\\executables\\IEDriverServer.exe");
+			/*2. After setting the path of driver executable, create an instance of required browser*/
+			return new InternetExplorerDriver();
+		}
+		return null;
+	}
+}
+
+
+	
+
+
